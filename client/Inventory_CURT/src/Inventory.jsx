@@ -63,14 +63,14 @@ function Inventory(props) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ id: id }),
+      body: JSON.stringify({ id: id ,user:props.user.id}),
     })
       .then((response) => {
         if (response.ok) {
           toast.success("Item deleted successfully");
           fetchItems();
         } else {
-          console.error("Error deleting item");
+          toast.error("Unauthorized to delete item");
         }
       })
       .catch((error) => {
@@ -160,7 +160,7 @@ function Inventory(props) {
         </tbody>
       </Table>
       <AddItem show={show} setShow={setShow} category={category} setAddedSuccessfully={setAddedSuccessfully}/>
-      <UpdateItem show={updateShow} setShow={setUpdateShow} category={item.__t} setAddedSuccessfully={setAddedSuccessfully} item={item} setItem={setItem}/>
+      <UpdateItem show={updateShow} setShow={setUpdateShow} category={item.__t} setAddedSuccessfully={setAddedSuccessfully} item={item} setItem={setItem} user={props.user.id}/>
     </div>
   );
 }

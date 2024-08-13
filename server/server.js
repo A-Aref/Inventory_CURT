@@ -74,17 +74,23 @@ app.get("/api/getItems", async (req, res) => {
 });
 
 app.delete("/api/deleteItem", async (req, res) => {
-  await Items.findByIdAndDelete(req.body.id)
+  await User.findById(req.body.user).then((user) => {
+    if(user.role !== "admin") throw new Error("Unauthorized");
+  }).then(() => {
+  Items.findByIdAndDelete(req.body.id)
     .then(() => {
       res.send("Item deleted successfully");
     })
-    .catch((error) => {
-      res.send(error.message).status(401);
-    });
+})
+.catch((error) => {
+  res.status(401).send(error.message);
+});
 });
 
 app.post("/api/updateItem", async (req, res) => {
-  console.log(req.body);
+  await User.findById(req.body.user).then((user) => {
+    if(user.role !== "admin") throw new Error("Unauthorized")
+  }).then(async () => {
   if (req.body.category === "mechanical") {
     await MechanicalPart.findByIdAndUpdate(req.body._id, {
       name: req.body.name,
@@ -110,6 +116,9 @@ app.post("/api/updateItem", async (req, res) => {
     });
   }
   res.send("Item updated successfully");
+}).catch((error) => {
+  return res.status(401).send(error.message);
+});
 });
 
 app.post("/api/addItem", async (req, res) => {

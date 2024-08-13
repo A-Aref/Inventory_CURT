@@ -119,14 +119,13 @@ function UpdateItem(props) {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({_id:props.item._id, name: name, quantity: quantity, description: description, category: props.category}),
+    body: JSON.stringify({_id:props.item._id, name: name, quantity: quantity, description: description, category: props.category, user: props.user}),
   })
     .then((response) => {
         if (response.ok) {
             return response.text();
         } else {
-            console.error("Error adding item:", response);
-            toast.error("An unexpected error occurred. Please try again later.");
+            toast.error("Unaothorized access");
         }
     }).then((data) => {
         toast.success(data);
