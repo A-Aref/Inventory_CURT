@@ -35,7 +35,11 @@ function Signin(props) {
       })
         .then((response) => {
           if (response.ok) {
-            return response.json();
+            return response.json().then((data) => {
+              props.setPage("Inventory");
+                navigate("/Inventory");
+                props.setUser(JSON.parse(data));
+            });
           } else if (response.status === 401) {
             toast.error("Incorrect password. Please try again.");
           } else if (response.status === 404) {
@@ -43,10 +47,6 @@ function Signin(props) {
           } else {
             toast.error("An unexpected error occurred. Please try again later.");
           }
-        }).then((data) => {
-          props.setPage("Inventory");
-            navigate("/Inventory");
-            props.setUser(JSON.parse(data));
         })
         .catch((error) => {
           console.error("Error logging in:", error);
