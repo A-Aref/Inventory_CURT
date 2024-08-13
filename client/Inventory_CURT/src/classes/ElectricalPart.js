@@ -1,17 +1,16 @@
 
-import { InventoryItem } from "./inventoryItem";
+import InventoryItem from "./InventoryItem";
 
-class ElectricalPart extends InventoryItem {
-  constructor(name, quantity, id, voltage, current, powerRating) {
-    this.name = name;
-    this.quantity = quantity;
-    this.id = id;
+export default class ElectricalPart extends InventoryItem {
+  constructor(name, quantity, id, voltage, current, powerRating,_id) {
+    super(name, quantity, id,_id,"electrical");
     this.voltage = voltage;
     this.current = current;
     this.powerRating = powerRating;
   }
 
   getDescription() {
-    return [this.voltage, this.current, this.powerRating];
+    return [{name:"Voltage", val:this.voltage}, {name:"Current", val:this.current}, {name:"Power Rating", val:this.powerRating}];
   }
 }
+

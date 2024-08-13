@@ -46,7 +46,7 @@ function Signin(props) {
         }).then((data) => {
           props.setPage("Inventory");
             navigate("/Inventory");
-            props.setUser(data);
+            props.setUser(JSON.parse(data));
         })
         .catch((error) => {
           console.error("Error logging in:", error);

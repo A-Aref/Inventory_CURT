@@ -11,9 +11,6 @@ function Routing() {
   const [page, setPage] = useState('');
   const [user, setUser] = useState('');
 
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
 
   return (
     <>
