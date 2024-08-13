@@ -63,7 +63,7 @@ app.post("/api/login", async (req, res) => {
         }
       });
     } else {
-      return res.status(404);
+      return res.status(404).send("User not found");
     }
   });
 });
