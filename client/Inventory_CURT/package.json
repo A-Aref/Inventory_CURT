@@ -1,7 +1,7 @@
 {
   "name": "invtory-curt",
   "private": true,
-  "proxy": "https://inventorycurtbackend-abd-allah-ahmad-arefs-projects.vercel.app/",
+  "proxy": "http://localhost:5000",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
