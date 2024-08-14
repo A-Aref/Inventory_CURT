@@ -25,8 +25,6 @@ This repository contains the source code for an Inventory Management System buil
     
     MONGOCONNECTION=your_mongodb_connection_string
     
-    PORT=5000
-    
 4.  Start the development servers:
     
     ## In one terminal, start the backend server
